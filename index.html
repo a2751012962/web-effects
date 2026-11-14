@@ -1,24 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neon 3D Tubes Cursor Trail</title>
-  <meta name="description" content="Neon 3D tubes that follow the cursor, built with Three.js. Original by Kevin Levron (soju22).">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>特效收藏</title>
+  <meta name="description" content="收藏的网页特效合集，每个都可以直接打开预览。">
+  <style>
+    :root {
+      --bg: #0b0b10;
+      --panel: #15151d;
+      --line: #262633;
+      --text: #ececf3;
+      --muted: #9a9aad;
+      --accent: #f967fb;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 48px 20px 64px; }
+    header { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 24px; margin-bottom: 28px; }
+    header .titles { flex: 1 1 260px; }
+    h1 { margin: 0; font-size: 32px; letter-spacing: 0.02em; }
+    #count { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+    #search {
+      flex: 0 1 280px;
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+    #search:focus { border-color: var(--accent); }
+    #grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 20px; }
+    .card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .thumb { display: block; aspect-ratio: 16 / 10; background: #000; overflow: hidden; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .body { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px 16px; flex: 1; }
+    .card h2 { margin: 0; font-size: 17px; }
+    .card h2 a { color: inherit; text-decoration: none; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      padding: 2px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .meta { margin-top: auto; padding-top: 8px; color: var(--muted); font-size: 12px; }
+    .meta a { color: var(--text); }
+    #empty { display: none; padding: 48px 0; color: var(--muted); text-align: center; }
+  </style>
 </head>
 <body>
-  <div id="app">
-    <canvas id="canvas"></canvas>
-    <div class="hero">
-      <h1>Tubes</h1>
-      <h2>Cursor</h2>
-      <a target="_blank" rel="noopener" href="https://www.framer.com/@kevin-levron/">Framer Component</a>
-    </div>
+  <div class="wrap">
+    <header>
+      <div class="titles">
+        <h1>特效收藏</h1>
+        <p id="count"></p>
+      </div>
+      <input id="search" type="search" placeholder="搜索名称、标签、作者…" aria-label="搜索特效">
+    </header>
+    <main id="grid"></main>
+    <p id="empty">没有匹配的特效</p>
   </div>
-  <script type="module" src="script.js"></script>
+
+  <script type="module">
+    import { effects } from "./effects.js"
+
+    const grid = document.getElementById("grid")
+    const count = document.getElementById("count")
+    const empty = document.getElementById("empty")
+    const search = document.getElementById("search")
+
+    function el(tag, props = {}, children = []) {
+      const node = Object.assign(document.createElement(tag), props)
+      node.append(...children)
+      return node
+    }
+
+    function card(e) {
+      const href = `./${e.slug}/`
+      const img = el("img", { src: `${href}preview.jpg`, alt: `${e.title} 预览图`, loading: "lazy" })
+      const meta = el("div", { className: "meta" }, [
+        `${e.author} · ${e.license} · `,
+        el("a", { href: e.source, target: "_blank", rel: "noopener", textContent: "原作" }),
+      ])
+      return el("article", { className: "card" }, [
+        el("a", { className: "thumb", href, tabIndex: -1 }, [img]),
+        el("div", { className: "body" }, [
+          el("h2", {}, [el("a", { href, textContent: e.title })]),
+          el("p", { textContent: e.desc }),
+          el("div", { className: "tags" }, e.tags.map(t => el("span", { className: "tag", textContent: t }))),
+          meta,
+        ]),
+      ])
+    }
+
+    function render() {
+      const q = search.value.trim().toLowerCase()
+      const shown = effects.filter(e =>
+        !q || [e.title, e.desc, e.author, ...e.tags].join(" ").toLowerCase().includes(q))
+      grid.replaceChildren(...shown.map(card))
+      empty.style.display = shown.length ? "none" : "block"
+      count.textContent = q ? `${shown.length} / ${effects.length} 个特效` : `共 ${effects.length} 个特效`
+    }
+
+    search.addEventListener("input", render)
+    render()
+  </script>
 </body>
 </html>

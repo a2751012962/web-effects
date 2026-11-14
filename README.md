@@ -1,30 +1,25 @@
-# Neon 3D Tubes Cursor Trail
+# 特效收藏（web-effects）
 
-跟随鼠标移动的霓虹 3D 管道特效（Three.js）。移动鼠标拖出发光管道，点击页面随机切换颜色。
+收藏的网页特效合集。每个特效一个文件夹，可以独立打开；根目录是画廊首页。
 
-**在线预览：** https://a2751012962.github.io/neon-3d-tubes-cursor-trail/
+**在线预览：** https://a2751012962.github.io/web-effects/
 
-## 来源与许可
+## 特效列表
 
-- 原作：[Neon 3D Tubes Cursor Trail](https://codepen.io/soju22/pen/qEbdVjK)，作者 Kevin Levron（[soju22](https://codepen.io/soju22)）
-- 发现于：[freefrontend.com/three-js](https://freefrontend.com/three-js/#2026-02-05-neon-3d-tubes-cursor-trail-l)
-- 特效代码许可：**CC BY-NC-SA 4.0** —— 需署名、**禁止商用**、衍生作品须以相同许可分享
-- `vendor/tubes1.min.js` 来自 npm 包 [`threejs-components@0.0.19`](https://www.npmjs.com/package/threejs-components)（内含 Three.js，MIT）
+| 特效 | 预览 | 原作 | 许可 |
+| --- | --- | --- | --- |
+| [Neon 3D Tubes Cursor Trail](neon-3d-tubes-cursor-trail/) | [打开](https://a2751012962.github.io/web-effects/neon-3d-tubes-cursor-trail/) | [Kevin Levron (soju22)](https://codepen.io/soju22/pen/qEbdVjK) | CC BY-NC-SA 4.0 |
 
-本仓库只是把原作保存为可独立运行的静态页面，改动仅限于：补全 HTML 外壳、把依赖库从 CDN 改为本地文件。
+## 加一个新特效
 
-## 文件
-
-| 文件 | 说明 |
-| --- | --- |
-| `index.html` | 页面结构 |
-| `style.css` | 样式（与原作一致） |
-| `script.js` | 特效初始化与点击换色 |
-| `vendor/tubes1.min.js` | 特效库（本地副本） |
+1. 新建文件夹 `<特效名>/`，放入 `index.html`（及它用到的 css / js / 依赖）。
+2. 截一张图存为 `<特效名>/preview.jpg`，作为画廊缩略图。
+3. 在 `effects.js` 数组最前面加一条记录（`slug` 要等于文件夹名）。
+4. 在上面的「特效列表」加一行，然后提交推送 —— GitHub Pages 会自动更新。
 
 ## 本地运行
 
-脚本是 ES Module，不能直接双击 `index.html` 打开，需要起一个本地静态服务器：
+页面用了 ES Module，不能直接双击打开，需要起一个本地静态服务器：
 
 ```bash
 python -m http.server 8000
@@ -32,8 +27,6 @@ python -m http.server 8000
 
 然后访问 http://localhost:8000
 
-## 自定义
+## 许可说明
 
-在 `script.js` 里改 `colors`（管道颜色，3 个）和 `lights.colors`（灯光颜色，4 个）、`lights.intensity`（亮度）。
-
-想用在自己的页面里：保留 `<canvas id="canvas">` 和 `#canvas` 的固定定位样式，引入 `script.js` 即可，`.hero` 里的文字可以随意替换。
+这里的特效都来自各自的原作者，**各自沿用原作的许可证**（见每个特效文件夹里的 README 和上表），使用前请先看清楚 —— 例如标注 NC 的不能商用。
