@@ -1,0 +1,80 @@
+:root {
+  --bg: #17171a;
+  --text: #f1f0ec;
+  --muted: #9a988f;
+  --panel: #202024;
+  --line: #303036;
+  --accent: #f1f0ec;
+  --accent-ink: #17171a;
+
+  /* 拉绳的位置和颜色由这些变量控制 */
+  --pullcord-top: 0px;
+  --pullcord-right: clamp(2.5rem, 14vw, 12rem);
+  --pullcord-ink: rgba(255, 255, 255, 0.34);
+}
+:root[data-theme="light"] {
+  --bg: #f4f3ef;
+  --text: #1c1b19;
+  --muted: #6f6c64;
+  --panel: #ffffff;
+  --line: #dedbd2;
+  --accent: #1c1b19;
+  --accent-ink: #f4f3ef;
+  --pullcord-ink: rgba(0, 0, 0, 0.4);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.5;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+main {
+  max-width: 560px;
+  min-height: calc(100vh - 56px);
+  margin: 0 auto;
+  padding: 32vh 20px 32px;
+}
+.kicker {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+h1 { margin: 0; font-size: clamp(34px, 7vw, 52px); line-height: 1.1; }
+.lead { margin: 14px 0 0; color: var(--muted); }
+.count { margin: 18px 0 0; font-variant-numeric: tabular-nums; }
+
+.panel {
+  margin-top: 36px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background-color 0.35s ease, border-color 0.35s ease;
+}
+.row { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+.row > span { flex: 0 0 64px; color: var(--muted); }
+.row input { flex: 1; min-width: 0; accent-color: var(--accent); }
+.row output { flex: 0 0 48px; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.reset {
+  align-self: flex-start;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.reset:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+footer { padding: 0 20px 24px; color: var(--muted); font-size: 12px; text-align: center; }
+footer a { color: var(--text); }

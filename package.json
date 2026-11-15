@@ -1,0 +1,17 @@
+{
+  "name": "web-effects",
+  "private": true,
+  "type": "module",
+  "description": "收藏的网页特效合集。纯静态特效直接放文件夹；React 组件类特效用 esbuild 打包成静态页。",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "feral-blinds": "0.3.1",
+    "feral-fur": "0.1.1",
+    "pullcord": "0.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

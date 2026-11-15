@@ -1,0 +1,64 @@
+:root {
+  --bg: #121214;
+  --text: #f1f0ec;
+  --muted: #9a988f;
+  --line: #2c2c31;
+  --accent: #f1f0ec;
+  --accent-ink: #121214;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px 0 20px;
+}
+header { max-width: 860px; width: 100%; margin: 0 auto; padding: 0 20px; }
+h1 { margin: 0; font-size: 34px; }
+header p { margin: 4px 0 0; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; }
+.chips button {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.chips button:hover { border-color: var(--muted); }
+.chips button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.toggle input { accent-color: var(--accent); }
+header .hint { margin-top: 12px; font-size: 14px; min-height: 1.5em; }
+
+/* 给外层一个高度，组件会填满它 */
+.stage {
+  flex: none;
+  width: 100%;
+  height: 62vh;
+  min-height: 360px;
+  padding: 0 20px;
+}
+
+footer { margin-top: auto; padding: 0 20px; color: var(--muted); font-size: 12px; text-align: center; }
+footer a { color: var(--text); }

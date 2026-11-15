@@ -53,6 +53,23 @@
     .card:hover { border-color: var(--accent); transform: translateY(-2px); }
     .thumb { display: block; aspect-ratio: 16 / 10; background: #000; overflow: hidden; }
     .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .placeholder {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background:
+        radial-gradient(120% 90% at 85% 10%, rgba(249, 103, 251, 0.22), transparent 60%),
+        radial-gradient(110% 90% at 10% 95%, rgba(105, 88, 213, 0.28), transparent 60%),
+        #111118;
+      color: var(--text);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+    .tag.ext { border-color: var(--accent); color: var(--accent); }
     .body { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px 16px; flex: 1; }
     .card h2 { margin: 0; font-size: 17px; }
     .card h2 a { color: inherit; text-decoration: none; }
@@ -98,18 +115,30 @@
     }
 
     function card(e) {
-      const href = `./${e.slug}/`
-      const img = el("img", { src: `${href}preview.jpg`, alt: `${e.title} 预览图`, loading: "lazy" })
+      // 有 url 的是外链收藏（只存链接、不含代码），在新标签页打开原站
+      const external = Boolean(e.url)
+      const href = external ? e.url : `./${e.slug}/`
+      const open = external ? { href, target: "_blank", rel: "noopener" } : { href }
+      const thumb = external
+        ? el("span", { className: "placeholder", textContent: e.title })
+        : el("img", { src: `${href}preview.jpg`, alt: `${e.title} 预览图`, loading: "lazy" })
+      const tags = e.tags.map(t => el("span", { className: "tag", textContent: t }))
+      if (external) tags.unshift(el("span", { className: "tag ext", textContent: "外链 ↗" }))
       const meta = el("div", { className: "meta" }, [
         `${e.author} · ${e.license} · `,
-        el("a", { href: e.source, target: "_blank", rel: "noopener", textContent: "原作" }),
+        el("a", {
+          href: external ? e.url : e.source,
+          target: "_blank",
+          rel: "noopener",
+          textContent: external ? "原站" : "原作",
+        }),
       ])
       return el("article", { className: "card" }, [
-        el("a", { className: "thumb", href, tabIndex: -1 }, [img]),
+        el("a", { className: "thumb", tabIndex: -1, ...open }, [thumb]),
         el("div", { className: "body" }, [
-          el("h2", {}, [el("a", { href, textContent: e.title })]),
+          el("h2", {}, [el("a", { textContent: e.title, ...open })]),
           el("p", { textContent: e.desc }),
-          el("div", { className: "tags" }, e.tags.map(t => el("span", { className: "tag", textContent: t }))),
+          el("div", { className: "tags" }, tags),
           meta,
         ]),
       ])
@@ -121,7 +150,10 @@
         !q || [e.title, e.desc, e.author, ...e.tags].join(" ").toLowerCase().includes(q))
       grid.replaceChildren(...shown.map(card))
       empty.style.display = shown.length ? "none" : "block"
-      count.textContent = q ? `${shown.length} / ${effects.length} 个特效` : `共 ${effects.length} 个特效`
+      const links = effects.filter(e => e.url).length
+      count.textContent = q
+        ? `${shown.length} / ${effects.length} 个特效`
+        : `共 ${effects.length} 个特效` + (links ? `，其中 ${links} 个为外链收藏` : "")
     }
 
     search.addEventListener("input", render)

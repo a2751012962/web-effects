@@ -1,6 +1,66 @@
 // 特效清单：每加一个特效，在数组最前面加一条记录即可。
-// slug 必须等于特效所在的文件夹名；文件夹里需要有 index.html 和 preview.jpg（缩略图）。
+//
+// 本地特效：slug 必须等于特效所在的文件夹名；文件夹里需要有 index.html 和 preview.jpg（缩略图）。
+// 外链收藏：作者没有开放源码/许可的作品只能收藏链接，不能把代码复制进来。
+//           这类条目不写 slug，改写 url（原站地址），画廊里会显示「外链」并在新标签页打开。
 export const effects = [
+  {
+    slug: "fur",
+    title: "Fur",
+    desc: "在 canvas 上一根一根画出来的毛皮，鼠标划过会被拨开再弹回。可换形状、颜色、长度。",
+    tags: ["React", "Canvas", "鼠标交互"],
+    author: "Sarthak Navalekar (mortspace)",
+    source: "https://www.npmjs.com/package/feral-fur",
+    license: "MIT",
+    added: "2026-11-15",
+  },
+  {
+    slug: "pullcord",
+    title: "PullCord",
+    desc: "一根真的会垂下来的拉绳（Verlet 绳索物理），拉一下切换明暗主题。",
+    tags: ["React", "物理", "主题切换"],
+    author: "Sarthak Navalekar (mortspace)",
+    source: "https://www.npmjs.com/package/pullcord",
+    license: "MIT",
+    added: "2026-11-15",
+  },
+  {
+    slug: "blinds",
+    title: "Blinds",
+    desc: "装在真实弹簧上的轮播：悬停的叶片回弹着展开，一个组件九种布局。",
+    tags: ["React", "轮播", "弹簧动画"],
+    author: "Sarthak Navalekar (mortspace)",
+    source: "https://www.npmjs.com/package/feral-blinds",
+    license: "MIT",
+    added: "2026-11-15",
+  },
+  {
+    url: "https://feralui.dev/gradients",
+    title: "Gradient Builder",
+    desc: "用日本传统色调柔和渐变的在线生成器，可导出 SVG / PNG / MP4。",
+    tags: ["渐变", "在线工具"],
+    author: "Sarthak Navalekar (mortspace)",
+    license: "未开放源码",
+    added: "2026-11-15",
+  },
+  {
+    url: "https://feralui.dev/nudge",
+    title: "Nudge",
+    desc: "结账页的捐款提示：鼠标伸向「No thanks」时，一只猫爪会伸出来按住它。",
+    tags: ["交互", "趣味"],
+    author: "Sarthak Navalekar (mortspace)",
+    license: "未开放源码",
+    added: "2026-11-15",
+  },
+  {
+    url: "https://feralui.dev/hologram",
+    title: "Hologram",
+    desc: "会随倾斜角度反光的镭射闪卡效果，光泽实时滑过卡面。",
+    tags: ["卡片", "光影"],
+    author: "Sarthak Navalekar (mortspace)",
+    license: "未开放源码",
+    added: "2026-11-15",
+  },
   {
     slug: "neon-3d-tubes-cursor-trail",
     title: "Neon 3D Tubes Cursor Trail",
