@@ -15,13 +15,18 @@
 
 ### 外链收藏（只存链接，不含代码）
 
-这些作品的作者没有开放源码，[FeralUI 的条款](https://feralui.dev/terms)写明未发布成 npm 包的演示「不得复制或再分发」，所以只在画廊里放了指向原站的卡片。
+这些作品的许可不允许把代码放进本仓库，所以只在画廊里放了指向原站的卡片。
 
-| 特效 | 原站 |
-| --- | --- |
-| Gradient Builder | https://feralui.dev/gradients |
-| Nudge | https://feralui.dev/nudge |
-| Hologram | https://feralui.dev/hologram |
+| 特效 | 演示 | 获取 / 原站 | 不能复制的原因 |
+| --- | --- | --- | --- |
+| Dither Cursor | https://dithercursor.framer.website/ | [Framer 市场 · Eniyan Rajaa](https://www.framer.com/marketplace/components/dither-cursor/) | Framer 免费组件许可 |
+| Mask Spotlight | https://cursorspotlight-gt.framer.website/ | [Framer 市场 · Gwatsin Thong](https://www.framer.com/marketplace/components/mask-spotlight/) | Framer 免费组件许可 |
+| Gradient Builder | https://feralui.dev/gradients | 同左 | FeralUI 条款 |
+| Nudge | https://feralui.dev/nudge | 同左 | FeralUI 条款 |
+| Hologram | https://feralui.dev/hologram | 同左 | FeralUI 条款 |
+
+- **Framer 免费组件许可**：[Framer Community 条款](https://www.framer.com/legal/community-terms) 7.3.1 允许在自己的项目里使用和修改，但不得把组件作为独立素材再分发、公开，也不得转载到其他代码仓库或平台。要用的话，在组件页点「Copy Component」粘贴进自己的 Framer 项目。
+- **FeralUI 条款**：[feralui.dev/terms](https://feralui.dev/terms) 写明未发布成 npm 包的演示「不得复制或再分发」。
 
 ## 加一个新特效
 
@@ -39,7 +44,7 @@
 3. `npm run build` —— `build.mjs` 会把每个 `*/src/main.jsx` 连同 React 打包成同目录下的 `app.js` + `app.css`。
 4. 之后同上：截图、加 `effects.js` 记录、提交推送（打包产物要一起提交，Pages 不会替你构建）。
 
-**作者没有开放源码的**：只在 `effects.js` 里加一条带 `url` 的外链记录，不要复制代码。
+**许可不允许复制的**（作者没开放源码，或像 Framer 市场组件那样禁止转载）：只在 `effects.js` 里加一条带 `url` 的外链记录，不要复制代码。演示页和获取页不同的话，`url` 写演示页、`source` 写获取页。
 
 ## 本地运行
 

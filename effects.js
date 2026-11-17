@@ -3,7 +3,28 @@
 // 本地特效：slug 必须等于特效所在的文件夹名；文件夹里需要有 index.html 和 preview.jpg（缩略图）。
 // 外链收藏：作者没有开放源码/许可的作品只能收藏链接，不能把代码复制进来。
 //           这类条目不写 slug，改写 url（原站地址），画廊里会显示「外链」并在新标签页打开。
+//           如果演示页和获取页不是同一个地址，url 写演示页，source 写获取页（如 Framer 市场的组件页）。
 export const effects = [
+  {
+    url: "https://dithercursor.framer.website/",
+    title: "Dither Cursor",
+    desc: "跟随鼠标的抖动点阵拖尾：靠近指针处密集，边缘碎成零星的点，停下后一粒一粒消散。",
+    tags: ["Framer", "Canvas", "鼠标跟随"],
+    author: "Eniyan Rajaa",
+    source: "https://www.framer.com/marketplace/components/dither-cursor/",
+    license: "Framer 免费组件（不得转载）",
+    added: "2026-11-17",
+  },
+  {
+    url: "https://cursorspotlight-gt.framer.website/",
+    title: "Mask Spotlight",
+    desc: "叠两层内容，一圈柔光跟着鼠标走，只在光照到的地方透出第二层。",
+    tags: ["Framer", "遮罩", "鼠标跟随"],
+    author: "Gwatsin Thong",
+    source: "https://www.framer.com/marketplace/components/mask-spotlight/",
+    license: "Framer 免费组件（不得转载）",
+    added: "2026-11-17",
+  },
   {
     slug: "fur",
     title: "Fur",

@@ -127,10 +127,10 @@
       const meta = el("div", { className: "meta" }, [
         `${e.author} · ${e.license} · `,
         el("a", {
-          href: external ? e.url : e.source,
+          href: e.source || e.url,
           target: "_blank",
           rel: "noopener",
-          textContent: external ? "原站" : "原作",
+          textContent: !external ? "原作" : e.source ? "组件页" : "原站",
         }),
       ])
       return el("article", { className: "card" }, [
